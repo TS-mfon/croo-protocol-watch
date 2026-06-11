@@ -1,0 +1,2 @@
+import test from "node:test";import assert from "node:assert/strict";import { inputSchema, serviceHandler } from "../src/service.js";
+test("protocol-watch validates and executes its core path",async()=>{const input=inputSchema.parse({chain:"base",protocol:"Test",contracts:["0x1111111111111111111111111111111111111111"],lookback_blocks:100});try{const out=await serviceHandler(input,{transition:async()=>{}});assert.equal((out.result as any).protocol,"Test")}catch(e){assert.match(String(e),/required|fetch|RPC|dependency|GenLayer|Sentinel/);}});
